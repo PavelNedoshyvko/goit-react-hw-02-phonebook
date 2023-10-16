@@ -4,7 +4,7 @@ import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
 import { nanoid } from 'nanoid';
 import { AppWrap, TitleApp, TitleContactList } from "./App.styled";
-// import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 export class App extends Component {
 
@@ -16,15 +16,13 @@ export class App extends Component {
 	addContact = values => {
 		const contactInput = { id: nanoid(), ...values }
 		this.setState(prevState => {
-			prevState.contacts.filter((contact) => {
-				if (contact.firstName === contactInput.firstName) {
-					return alert(`${contactInput.firstName} is already in contacts.`);
-					// return false;
-					// toast.success('Successfully toasted!')
-				}
-				return false;
-			});
-			return { contacts: [...prevState.contacts, contactInput], };
+			const existingContact = prevState.contacts.find(contact =>
+				contact.firstName === contactInput.firstName);
+			if (existingContact) {
+				toast.error(`${contactInput.firstName} is already in contacts.`)
+			} else {
+				return { contacts: [...prevState.contacts, contactInput] };
+			}
 		});
 	};
 
@@ -56,7 +54,7 @@ export class App extends Component {
 					onChangeFilter={this.changeFilter} />
 				<ContactList contacts={visibleContacts}
 					onDeleteContact={this.deleteContact} />
-				{/* <Toaster /> */}
+				<Toaster />
 			</AppWrap>
 		);
 	};
