@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
 export const ListItem = styled.li`
+display: flex;
+justify-content: space-between;
+padding: 10px;
 	font-size: 20px;
+	border: 1.5px solid black;
+	border-radius: 10px;
 &:not(:last-child){
 	margin-bottom: 10px;
 }
