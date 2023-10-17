@@ -1,4 +1,4 @@
-import { Field, Form } from "formik";
+import { ErrorMessage, Field, Form } from "formik";
 import styled from "styled-components";
 
 export const FormContacts = styled(Form)`
@@ -47,4 +47,8 @@ margin-right: auto;
 	&:hover {
   background-color:#ffc61a;
 }
+`;
+
+export const ErrMessage = styled(ErrorMessage)`
+margin-bottom: 20px;
 `;

@@ -1,6 +1,6 @@
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { AddContactBtn, FieldInput, FormContacts, FormLabel } from './ContactForm.styled';
+import { AddContactBtn, ErrMessage, FieldInput, FormContacts, FormLabel } from './ContactForm.styled';
 
 
 const phoneRegExp = /^(\+?\d+)?\s*(\(\d+\))?[\s-]*([\d-]*)$/;
@@ -11,12 +11,12 @@ const ContactSchema = Yup.object().shape({
 		.matches(nameRegExp,
 			'Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz.')
 		.min(2, 'Too Short!')
-		.required('Required'),
+		.required('Required!'),
 	tel: Yup.string()
 		.matches(phoneRegExp, 'Phone number is not valid!')
 		.min(16, "Too short!")
 		.max(16, "Too long!")
-		.required('Required'),
+		.required('Required!'),
 });
 
 export const ContactForm = ({ onAddContact }) => {
@@ -36,11 +36,11 @@ export const ContactForm = ({ onAddContact }) => {
 				<FormContacts>
 					<FormLabel htmlFor="firstName">Name</FormLabel>
 					<FieldInput id="firstName" name="firstName" placeholder="" />
-					<ErrorMessage name="firstName" />
+					<ErrMessage name="firstName" component="div"/>
 
 					<FormLabel htmlFor="tel">Number</FormLabel>
 					<FieldInput id="tel" name="tel" placeholder="+XXXXX-XXX-XX-XX" type="tel" />
-					<ErrorMessage name="tel" />
+					<ErrMessage name="tel" component="div"/>
 
 					<AddContactBtn type="submit">Add contact</AddContactBtn>
 				</FormContacts>
