@@ -13,9 +13,10 @@ const ContactSchema = Yup.object().shape({
 		.min(2, 'Too Short!')
 		.required('Required!'),
 	tel: Yup.string()
-		.matches(phoneRegExp, 'Phone number is not valid!')
+		.matches(phoneRegExp,
+			'Phone number must be digits and can contain dashes, parentheses and can start with +')
 		.min(16, "Too short!")
-		.max(16, "Too long!")
+		.max(18, "Too long!")
 		.required('Required!'),
 });
 
@@ -39,7 +40,7 @@ export const ContactForm = ({ onAddContact }) => {
 					<ErrMessage name="firstName" component="div"/>
 
 					<FormLabel htmlFor="tel">Number</FormLabel>
-					<FieldInput id="tel" name="tel" placeholder="+XXXXX-XXX-XX-XX" type="tel" />
+					<FieldInput id="tel" name="tel" placeholder="+XX(XXX)-XXX-XX-XX" type="tel" />
 					<ErrMessage name="tel" component="div"/>
 
 					<AddContactBtn type="submit">Add contact</AddContactBtn>
